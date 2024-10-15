@@ -1,15 +1,12 @@
-# Use the official Ubuntu 20.04 image as a base
-FROM ubuntu:20.04
-
-# Set environment variables to avoid tzdata prompts during build
-ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=America/New_York  # Change this to your desired timezone
+# Use the official Debian image as a base
+FROM debian:bullseye
 
 # Install Node.js, npm, and tzdata
 RUN apt-get update && apt-get install -y \
-    nodejs \
-    npm \
+    curl \
     tzdata \
+    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y nodejs \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
