@@ -1,10 +1,15 @@
 # Use the official Ubuntu 20.04 image as a base
 FROM ubuntu:20.04
 
-# Install Node.js and npm
+# Set environment variables to avoid tzdata prompts during build
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/New_York  # Change this to your desired timezone
+
+# Install Node.js, npm, and tzdata
 RUN apt-get update && apt-get install -y \
     nodejs \
     npm \
+    tzdata \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
