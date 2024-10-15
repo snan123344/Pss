@@ -37,12 +37,12 @@ app.get('/', (req, res) => {
   `);
 });
 
-// Execute a command in the Basin Linux container
+// Execute a command in the Ubuntu container
 app.post('/execute', (req, res) => {
   const command = req.body.cmd;
 
-  // Run the Docker command
-  exec(`docker run --rm ubuntu:20.04 ${command}`, (error, stdout, stderr) => {
+  // Run the command directly (not through docker)
+  exec(command, (error, stdout, stderr) => {
     if (error) {
       return res.status(500).send(stderr || error.message);
     }
